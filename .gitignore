@@ -1,0 +1,20 @@
+# 依赖
+node_modules/
+
+# 构建产物（pnpm pack 时会随包发布，但源码仓库不追踪）
+lib/
+
+# npm pack / GitHub Release 归档
+*.tgz
+
+# 运行时用户上传数据（uploads/ 含 .spool）
+uploads/
+
+# 系统与编辑器
+.DS_Store
+Thumbs.db
+*.log
+
+# Python 缓存
+__pycache__/
+*.py[cod]

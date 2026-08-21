@@ -1,0 +1,8 @@
+# 统一 LF 换行，避免 Windows 推送后在 CI 出现 CRLF 差异
+* text=auto eol=lf
+
+# 图片按二进制处理（不参与换行/文本归一化）
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.webp binary

@@ -1,0 +1,67 @@
+{
+    "name":  "dsh-photowall-skin",
+    "version":  "0.5.0",
+    "description":  "DeepSeek Harness 皮肤插件：可上传画廊背景、侧栏轮播与玻璃拟态配色",
+    "license":  "MIT",
+    "author":  "Levi",
+    "homepage":  "https://github.com/3060571770/dsh-photowall-skin#readme",
+    "repository":  {
+                       "type":  "git",
+                       "url":  "git+https://github.com/3060571770/dsh-photowall-skin.git"
+                   },
+    "bugs":  {
+                 "url":  "https://github.com/3060571770/dsh-photowall-skin/issues"
+             },
+    "keywords":  [
+                     "dsh",
+                     "deepseek-harness",
+                     "skin",
+                     "theme",
+                     "gallery",
+                     "palette"
+                 ],
+    "engines":  {
+                    "node":  ">=22.18.0"
+                },
+    "private":  true,
+    "type":  "module",
+    "main":  "./lib/index.js",
+    "exports":  {
+                    ".":  "./lib/index.js",
+                    "./client":  "./lib/client.js",
+                    "./package.json":  "./package.json"
+                },
+    "files":  [
+                  "lib",
+                  "cordis.patch.yml"
+              ],
+    "dsh":  {
+                "bundle":  {
+                               "patch":  "./cordis.patch.yml"
+                           },
+                "client":  {
+                               "inject":  [
+                                              "@deepseek-ai/dsh-client-runtime",
+                                              "@deepseek-ai/dsh-client-ui-theme",
+                                              "@deepseek-ai/dsh-client-ui-layout",
+                                              "@deepseek-ai/dsh-client-ui-settings",
+                                              "@deepseek-ai/dsh-client-ui-settings-general",
+                                              "@deepseek-ai/dsh-client-locale"
+                                          ],
+                               "platform":  "web"
+                           }
+            },
+    "scripts":  {
+                    "clean":  "node -e \"require(\u0027node:fs\u0027).rmSync(\u0027lib\u0027,{recursive:true,force:true})\"",
+                    "build":  "pnpm run clean \u0026\u0026 tsdown",
+                    "test":  "pnpm run build \u0026\u0026 node --test tests/*.test.mjs",
+                    "pack:local":  "pnpm run test \u0026\u0026 pnpm pack"
+                },
+    "dependencies":  {
+                         "@deepseek-ai/schemastery":  "3.18.1"
+                     },
+    "devDependencies":  {
+                            "tsdown":  "0.22.2",
+                            "typescript":  "6.0.3"
+                        }
+}
