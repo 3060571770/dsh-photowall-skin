@@ -8,13 +8,17 @@ DeepSeek Harness（DSH）皮肤插件：上传你自己的图片作为**画廊�
 
 > 零核心代码改动：完全通过 DSH 官方插件机制（`shell.overlay` 画布层、`settings` 插槽、`theme.overrideTokens()` 主题扩展点）实现；卸载后界面完整恢复默认。
 
+> 🤷 本项目纯 **Vibe Coding** 产物，如果遇到很奇怪的 bug，大概率我也修不了 ¯\_(ツ)_/¯
+
 ## 界面预览
 
-<!-- 有截图后放入 docs/ 并替换此处
-| 画廊设置 | 漂移墙效果 |
+| 皮肤展示 1 | 皮肤展示 2 |
 | --- | --- |
-| ![画廊设置](docs/screenshot-gallery.png) | ![漂移墙](docs/screenshot-drift.png) |
--->
+| ![皮肤展示1](docs/皮肤展示1.jpeg) | ![皮肤展示2](docs/皮肤展示2.jpeg) |
+
+| 皮肤设置 |
+| --- |
+| ![皮肤设置](docs/皮肤设置.jpeg) |
 
 ## 功能
 
@@ -40,17 +44,13 @@ DeepSeek Harness（DSH）皮肤插件：上传你自己的图片作为**画廊�
 
 ```sh
 # 方式一：从 GitHub Releases 下载 .tgz 后用本地路径安装
-dsh plugin --profile web add ./dsh-photowall-skin-0.5.0.tgz
+dsh plugin --profile web add ./dsh-photowall-skin-0.5.1.tgz
 
 # 方式二：直接引用 GitHub 仓库安装
 dsh plugin --profile web add github:3060571770/dsh-photowall-skin
 ```
 
-> `github:` 方式要求仓库为**公开仓库**；pnpm 克隆后会先执行 `prepare` 自动构建出 `lib/`，无需手动编译。
-
 装完重启 `dsh web`，刷新页面，皮肤即出现在「设置 → 🎨 皮肤」。
-
-> ⚠️ 不要手动把包解压进 `node_modules`——DSH 只加载 `dsh.profile.bundles` 里显式列出的插件。
 
 卸载：`dsh plugin --profile web remove dsh-photowall-skin`
 
@@ -61,7 +61,7 @@ dsh plugin --profile web add github:3060571770/dsh-photowall-skin
 3. **侧栏**：勾选图片作侧栏背景（单选静态、多选轮播）。
 4. **配色**：选择主题主色与整体透明度，或逐 token 细调并保存为预设。
 
-所有修改实时生效，无需保存。
+添加展示的图片后请刷新页面，否则可能有图片显示错误。
 
 ## 工作原理
 

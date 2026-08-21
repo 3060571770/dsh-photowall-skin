@@ -66,6 +66,9 @@ const zh = {
   'gallery.mode-single-note': '每个主题单独选择一张作品',
   'gallery.rows': '行数',
   'gallery.speed': '漂移速度',
+  'gallery.direction': '漂移方向',
+  'gallery.direction-left': '向左',
+  'gallery.direction-right': '向右',
   'gallery.library': '作品库',
   'gallery.library-note': '勾选启用，拖动或使用箭头排序',
   'gallery.enabled': '启用',
@@ -163,6 +166,9 @@ const en = {
   'gallery.mode-single-note': 'One artwork saved for each theme',
   'gallery.rows': 'Rows',
   'gallery.speed': 'Drift speed',
+  'gallery.direction': 'Drift direction',
+  'gallery.direction-left': 'Left',
+  'gallery.direction-right': 'Right',
   'gallery.library': 'Artwork library',
   'gallery.library-note': 'Enable items, then drag or use arrows to order them.',
   'gallery.enabled': 'Enabled',
@@ -225,6 +231,7 @@ interface SkinSnapshot {
   singleId: string
   rowCount: number
   driftSpeedSeconds: number
+  driftDirection: 'left' | 'right'
   sidebarImageIds: string[]
   sidebarIntervalSeconds: number
   paletteTokens: Record<string, PaletteColor>
@@ -368,6 +375,7 @@ export class SkinRuntime {
       singleId: gallery.singleIds[scheme],
       rowCount: gallery.rowCount,
       driftSpeedSeconds: gallery.speedSeconds,
+      driftDirection: gallery.driftDirection,
       sidebarImageIds: sidebar.imageIds[scheme],
       sidebarIntervalSeconds: sidebar.intervalSeconds,
       paletteTokens: palette.tokens,
@@ -766,6 +774,7 @@ function GalleryOverlay({ runtime }: { runtime: SkinRuntime }) {
           className="pgs-artboard"
           data-photowall-artboard=""
           data-gallery-scheme={snapshot.scheme}
+          data-drift-direction={snapshot.driftDirection === 'right' ? 'right' : undefined}
           aria-hidden="true"
           style={{
             '--pgs-canvas': snapshot.scheme === 'dark' ? '#3E2722' : '#F9EAE5',

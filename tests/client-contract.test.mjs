@@ -82,6 +82,10 @@ test('0.4.9 composer-fade self-heal + hero↔active transition contract', () => 
   assert.match(client, /speedSeconds/)
   assert.match(client, /multiple/)
 
+  // Drift direction flips the odd/even keyframe names via a data attribute.
+  assert.match(GALLERY_STYLE, /data-drift-direction='right'/)
+  assert.match(client, /driftDirection/)
+
   // Static wall reuses the drift wall's per-row distribution (no sparse
   // span-2 bento): tiles-per-row = max(4, ceil(assets/rows)), flex-filled.
   assert.doesNotMatch(GALLERY_STYLE, /grid-row:\s*span\s*2/)
@@ -102,4 +106,13 @@ test('0.5 palette console groups tokens and shows preset swatches', () => {
   assert.match(GALLERY_STYLE, /pgs-preset-swatch/)
   assert.match(client, /COMMON_TOKENS/)
   assert.match(client, /pgs-token-group-heading/)
+})
+
+test('0.5 main-area glass follows palette tokens (no hardcoded warm-brown rgba)', () => {
+  // Composer card, header, assistant steps, bubbles, better-sidebar and the
+  // sidebar scrim all derive from --dsw-alias-* / --dsw-specific-* tokens.
+  assert.match(GALLERY_STYLE, /\[data-photowall-skin-frame\]\s+\[data-composer-card\]\s*\{[^}]*color-mix\(in srgb,\s*var\(--dsw-alias-bg-layer-1\)/)
+  assert.doesNotMatch(GALLERY_STYLE, /rgba\(62, 39, 34/)
+  assert.doesNotMatch(GALLERY_STYLE, /rgba\(249, 234, 229/)
+  assert.doesNotMatch(GALLERY_STYLE, /rgba\(35, 22, 18/)
 })

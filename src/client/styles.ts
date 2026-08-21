@@ -49,6 +49,16 @@ style[data-photowall-skin] { display: none; }
   animation-name: pgs-drift-right;
 }
 
+/* Drift direction: when the artboard carries data-drift-direction='right', swap
+   the odd/even keyframe names so the whole wall drifts the other way. */
+.pgs-artboard[data-drift-direction='right'] .pgs-track {
+  animation-name: pgs-drift-right;
+}
+
+.pgs-artboard[data-drift-direction='right'] .pgs-row:nth-child(even) .pgs-track {
+  animation-name: pgs-drift-left;
+}
+
 .pgs-sequence {
   min-width: 0;
   min-height: 0;
@@ -114,20 +124,12 @@ style[data-photowall-skin] { display: none; }
   background-color: color-mix(in srgb, var(--dsw-alias-bg-base) 93%, transparent);
 }
 
-[data-photowall-skin-frame][data-photowall-scheme='dark'] [data-composer-card] {
-  border-color: rgba(247, 217, 195, .18);
-  background: rgba(62, 39, 34, .62);
-  box-shadow: 0 18px 48px rgba(19, 11, 9, .26), inset 0 1px rgba(247, 217, 195, .08);
-  -webkit-backdrop-filter: blur(22px) saturate(128%);
-  backdrop-filter: blur(22px) saturate(128%);
-}
-
-[data-photowall-skin-frame][data-photowall-scheme='light'] [data-composer-card] {
-  border-color: rgba(53, 54, 58, .16);
-  background: rgba(249, 234, 229, .62);
-  box-shadow: 0 18px 48px rgba(53, 54, 58, .14), inset 0 1px rgba(255, 255, 255, .34);
-  -webkit-backdrop-filter: blur(22px) saturate(124%);
-  backdrop-filter: blur(22px) saturate(124%);
+[data-photowall-skin-frame] [data-composer-card] {
+  border-color: var(--dsw-alias-border-l2);
+  background: color-mix(in srgb, var(--dsw-alias-bg-layer-1) 66%, transparent);
+  box-shadow: 0 18px 48px color-mix(in srgb, var(--dsw-alias-label-primary) 14%, transparent), inset 0 1px color-mix(in srgb, var(--dsw-alias-label-primary) 5%, transparent);
+  -webkit-backdrop-filter: blur(22px) saturate(126%);
+  backdrop-filter: blur(22px) saturate(126%);
 }
 
 /* ── Left sidebar (workspaces + session list): full-bleed art with a
@@ -163,9 +165,9 @@ style[data-photowall-skin] { display: none; }
   background-image:
     linear-gradient(
       to bottom,
-      rgba(249, 234, 229, .58) 0%,
-      rgba(249, 234, 229, .76) 50%,
-      rgba(249, 234, 229, .58) 100%
+      color-mix(in srgb, var(--dsw-alias-bg-base) 70%, transparent) 0%,
+      color-mix(in srgb, var(--dsw-alias-bg-base) 92%, transparent) 50%,
+      color-mix(in srgb, var(--dsw-alias-bg-base) 70%, transparent) 100%
     ), var(--pgs-sidebar-image-previous, var(--pgs-sidebar-image, none));
 }
 
@@ -173,9 +175,9 @@ style[data-photowall-skin] { display: none; }
   background-image:
     linear-gradient(
       to bottom,
-      rgba(249, 234, 229, .58) 0%,
-      rgba(249, 234, 229, .76) 50%,
-      rgba(249, 234, 229, .58) 100%
+      color-mix(in srgb, var(--dsw-alias-bg-base) 70%, transparent) 0%,
+      color-mix(in srgb, var(--dsw-alias-bg-base) 92%, transparent) 50%,
+      color-mix(in srgb, var(--dsw-alias-bg-base) 70%, transparent) 100%
     ), var(--pgs-sidebar-image, none);
   opacity: 0;
   transition: opacity 800ms ease;
@@ -183,26 +185,6 @@ style[data-photowall-skin] { display: none; }
 
 [data-photowall-skin-frame][data-photowall-sidebar-transition] > div:first-child::after {
   opacity: 1;
-}
-
-[data-photowall-skin-frame][data-photowall-scheme='dark'] > div:first-child::before {
-  background-image:
-    linear-gradient(
-      to bottom,
-      rgba(35, 22, 18, .58) 0%,
-      rgba(35, 22, 18, .76) 50%,
-      rgba(35, 22, 18, .58) 100%
-    ), var(--pgs-sidebar-image-previous, var(--pgs-sidebar-image, none));
-}
-
-[data-photowall-skin-frame][data-photowall-scheme='dark'] > div:first-child::after {
-  background-image:
-    linear-gradient(
-      to bottom,
-      rgba(35, 22, 18, .58) 0%,
-      rgba(35, 22, 18, .76) 50%,
-      rgba(35, 22, 18, .58) 100%
-    ), var(--pgs-sidebar-image, none);
 }
 
 /* "Hide artwork background" also retires the sidebar art. */
@@ -218,21 +200,15 @@ style[data-photowall-skin] { display: none; }
    scoped class names (e.g. nArs4W_panel / nArs4W_bottomPanel) to add the
    frosted-glass backdrop. */
 [data-dsh-better-sidebar] {
-  --dsw-alias-bg-layer-1: rgba(249, 234, 229, 0.70);
-  --dsw-alias-bg-layer-2: rgba(214, 208, 206, 0.74);
-  --dsw-alias-bg-layer-3: rgba(249, 234, 229, 0.78);
+  --dsw-alias-bg-layer-1: color-mix(in srgb, var(--dsw-alias-bg-layer-1) 74%, transparent);
+  --dsw-alias-bg-layer-2: color-mix(in srgb, var(--dsw-alias-bg-layer-2) 77%, transparent);
+  --dsw-alias-bg-layer-3: color-mix(in srgb, var(--dsw-alias-bg-layer-3) 80%, transparent);
 }
 
 [data-dsh-better-sidebar] [class*='panel'],
 [data-dsh-better-sidebar] [class*='Panel'] {
   -webkit-backdrop-filter: blur(18px) saturate(120%);
   backdrop-filter: blur(18px) saturate(120%);
-}
-
-body[data-photowall-scheme='dark'] [data-dsh-better-sidebar] {
-  --dsw-alias-bg-layer-1: rgba(62, 39, 34, 0.72);
-  --dsw-alias-bg-layer-2: rgba(95, 79, 73, 0.76);
-  --dsw-alias-bg-layer-3: rgba(62, 39, 34, 0.80);
 }
 
 /* ── Conversation messages: frosted glass bubbles. The user bubble reads the
@@ -243,29 +219,16 @@ body[data-photowall-scheme='dark'] [data-dsh-better-sidebar] {
 [data-photowall-skin-frame] [data-chat-flow-kind='steering'] [class*='bubble'] {
   -webkit-backdrop-filter: blur(18px) saturate(125%);
   backdrop-filter: blur(18px) saturate(125%);
-  border: 1px solid rgba(53, 54, 58, .10);
-}
-
-[data-photowall-skin-frame][data-photowall-scheme='dark']
-[data-chat-flow-kind='user'] [class*='bubble'],
-[data-photowall-skin-frame][data-photowall-scheme='dark']
-[data-chat-flow-kind='steering'] [class*='bubble'] {
-  border-color: rgba(247, 217, 195, .14);
+  border: 1px solid var(--dsw-alias-border-l1);
 }
 
 [data-photowall-skin-frame] [data-chat-flow-kind='assistant-step'] {
-  background: rgba(249, 234, 229, 0.42);
-  border: 1px solid rgba(53, 54, 58, .08);
+  background: color-mix(in srgb, var(--dsw-specific-bubble) 67%, transparent);
+  border: 1px solid var(--dsw-alias-border-l1);
   border-radius: 18px;
   padding: 12px 16px;
   -webkit-backdrop-filter: blur(18px) saturate(118%);
   backdrop-filter: blur(18px) saturate(118%);
-}
-
-[data-photowall-skin-frame][data-photowall-scheme='dark']
-[data-chat-flow-kind='assistant-step'] {
-  background: rgba(35, 22, 18, 0.44);
-  border-color: rgba(247, 217, 195, .12);
 }
 
 .pgs-settings-row {
@@ -875,10 +838,6 @@ body[data-photowall-scheme='dark'] [data-dsh-better-sidebar] {
    conversation.session.header slot wrapper (display: contents), so target it
    via that slot rather than the [data-phase] root. */
 [data-photowall-skin-frame] [data-slot='conversation.session.header'] > header {
-  background: rgba(249, 234, 229, 0.70);
-}
-
-[data-photowall-skin-frame][data-photowall-scheme='dark'] [data-slot='conversation.session.header'] > header {
-  background: rgba(35, 22, 18, 0.70);
+  background: color-mix(in srgb, var(--dsw-alias-bg-base) 84%, transparent);
 }
 `

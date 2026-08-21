@@ -35,6 +35,8 @@ export interface GalleryCustomization {
   rowCount: number
   /** Seconds for one full drift loop, clamped to 90–120. */
   speedSeconds: number
+  /** Dominant drift direction ('left': odd rows drift left, even rows reverse; 'right' flips both). */
+  driftDirection: 'left' | 'right'
   /** @deprecated Legacy 0.3.x value, retained only so existing settings can migrate safely. */
   singleId?: string
 }
@@ -87,6 +89,7 @@ export function defaultGalleryCustomization(): GalleryCustomization {
     singleIds: themePair('', ''),
     rowCount: 2,
     speedSeconds: 96,
+    driftDirection: 'left',
   }
 }
 

@@ -79,7 +79,8 @@ export function normalizeGallery(value: unknown, customs: readonly CustomImage[]
 
   const rowCount = Math.min(6, Math.max(1, Math.round(Number(source.rowCount) || defaults.rowCount)))
   const speedSeconds = Math.min(120, Math.max(90, Math.round(Number(source.speedSeconds) || defaults.speedSeconds)))
-  return { enabledIds: enabled, mode, singleIds, rowCount, speedSeconds }
+  const driftDirection = source.driftDirection === 'right' ? 'right' : 'left'
+  return { enabledIds: enabled, mode, singleIds, rowCount, speedSeconds, driftDirection }
 }
 
 /** Convert legacy 0.3.x single sidebar selection into per-theme playlists. */

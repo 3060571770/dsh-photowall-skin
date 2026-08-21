@@ -360,10 +360,19 @@ export function SettingsPage({ runtime, t }: SettingsPageProps) {
             </label>
           )}
           {gallery.mode === GALLERY_MODE_DRIFT && (
-            <label className="pgs-range-field">
-              <span>{t('gallery.speed')} <b>{gallery.speedSeconds}s</b></span>
-              <input type="range" min="90" max="120" step="1" value={gallery.speedSeconds} onChange={event => setGallery({ ...gallery, speedSeconds: Number(event.target.value) })} />
-            </label>
+            <>
+              <label className="pgs-range-field">
+                <span>{t('gallery.speed')} <b>{gallery.speedSeconds}s</b></span>
+                <input type="range" min="90" max="120" step="1" value={gallery.speedSeconds} onChange={event => setGallery({ ...gallery, speedSeconds: Number(event.target.value) })} />
+              </label>
+              <div className="pgs-range-field">
+                <span>{t('gallery.direction')}</span>
+                <span className="pgs-theme-toggle" role="group" aria-label={t('gallery.direction')}>
+                  <button type="button" className={gallery.driftDirection === 'left' ? 'is-active' : ''} onClick={() => setGallery({ ...gallery, driftDirection: 'left' })}>{t('gallery.direction-left')}</button>
+                  <button type="button" className={gallery.driftDirection === 'right' ? 'is-active' : ''} onClick={() => setGallery({ ...gallery, driftDirection: 'right' })}>{t('gallery.direction-right')}</button>
+                </span>
+              </div>
+            </>
           )}
           {gallery.mode === GALLERY_MODE_SINGLE && (
             <label className="pgs-select-field">

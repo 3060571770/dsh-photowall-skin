@@ -26,6 +26,7 @@ export const SkinSettingsSchema: z<SkinSettings> = z.object({
     singleIds: z.any().default({}),
     rowCount: z.number().default(2),
     speedSeconds: z.number().default(96),
+    driftDirection: z.any().default('left'),
     singleId: z.string().default(''),
   }).default({}),
   sidebar: z.object({
