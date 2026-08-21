@@ -71,10 +71,10 @@ export function generateQuickTokens(quick: PaletteCustomization['quick']): Recor
 }
 
 export const BUILTIN_PALETTE_PRESETS: readonly BuiltinPalettePreset[] = [
-  { id: 'original', name: '原始暖棕', quick: { dark: { seedColor: '#D7967B', opacity: 0.76 }, light: { seedColor: '#9F4C3E', opacity: 0.76 } } },
-  { id: 'neutral', name: '中性灰', quick: { dark: { seedColor: '#9ba0a8', opacity: 0.74 }, light: { seedColor: '#68717d', opacity: 0.76 } } },
-  { id: 'blue', name: '静谧蓝', quick: { dark: { seedColor: '#8fb8df', opacity: 0.76 }, light: { seedColor: '#356f9f', opacity: 0.78 } } },
-  { id: 'forest', name: '森林绿', quick: { dark: { seedColor: '#9fcaad', opacity: 0.76 }, light: { seedColor: '#3f7654', opacity: 0.78 } } },
+  { id: 'original', name: 'palette.preset-original', quick: { dark: { seedColor: '#D7967B', opacity: 0.76 }, light: { seedColor: '#9F4C3E', opacity: 0.76 } } },
+  { id: 'neutral', name: 'palette.preset-neutral', quick: { dark: { seedColor: '#9ba0a8', opacity: 0.74 }, light: { seedColor: '#68717d', opacity: 0.76 } } },
+  { id: 'blue', name: 'palette.preset-blue', quick: { dark: { seedColor: '#8fb8df', opacity: 0.76 }, light: { seedColor: '#356f9f', opacity: 0.78 } } },
+  { id: 'forest', name: 'palette.preset-forest', quick: { dark: { seedColor: '#9fcaad', opacity: 0.76 }, light: { seedColor: '#3f7654', opacity: 0.78 } } },
 ]
 
 export function builtinTokens(id: string, quick: PaletteCustomization['quick']): Record<string, PaletteColor> {

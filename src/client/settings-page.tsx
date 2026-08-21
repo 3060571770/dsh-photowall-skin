@@ -67,12 +67,13 @@ function uploadFile(
   file: File,
   scheme: GalleryScheme,
   onProgress: (progress: number) => void,
+  t: (key: string) => string,
 ): Promise<CustomImage> {
   return new Promise(async (resolve, reject) => {
     try {
       const ext = extensionOf(file)
-      if (ext === undefined) throw new Error('仅支持 JPG、PNG 或 WebP 图片')
-      if (file.size > 12 * 1024 * 1024) throw new Error('图片不能超过 12 MB')
+      if (ext === undefined) throw new Error(t('upload.error.ext'))
+      if (file.size > 12 * 1024 * 1024) throw new Error(t('upload.error.size'))
       const { width, height } = await readImageSize(file)
       const query = new URLSearchParams({ scheme, width: String(width), height: String(height), ext })
       const request = new XMLHttpRequest()
@@ -81,11 +82,11 @@ function uploadFile(
       request.upload.onprogress = event => {
         if (event.lengthComputable) onProgress(Math.round(event.loaded / event.total * 100))
       }
-      request.onerror = () => reject(new Error('上传连接失败'))
+      request.onerror = () => reject(new Error(t('upload.error.connection')))
       request.onload = () => {
         const body = request.response as { ok?: boolean; image?: CustomImage; error?: string } | null
         if (request.status >= 200 && request.status < 300 && body?.ok && body.image !== undefined) resolve(body.image)
-        else reject(new Error(body?.error ?? '上传失败'))
+        else reject(new Error(body?.error ?? t('upload.error.failed')))
       }
       request.send(file)
     } catch (error) {
@@ -265,7 +266,7 @@ export function SettingsPage({ runtime, t }: SettingsPageProps) {
       try {
         const image = await uploadFile(file, themeScheme, progress => {
           setUploadProgress(Math.round((index + progress / 100) / list.length * 100))
-        })
+        }, t)
         if (!added.includes(image.id)) added.push(image.id)
       } catch (error) {
         setUploadError(error instanceof Error ? error.message : String(error))
@@ -421,7 +422,7 @@ export function SettingsPage({ runtime, t }: SettingsPageProps) {
             {BUILTIN_PALETTE_PRESETS.map(item => (
               <button key={item.id} type="button" className="pgs-preset-card" onClick={() => applyBuiltinPreset(item.id)}>
                 <span className="pgs-preset-swatch" style={{ '--pgs-swatch-dark': item.quick.dark.seedColor, '--pgs-swatch-light': item.quick.light.seedColor } as React.CSSProperties} />
-                <span>{item.name}</span>
+                <span>{t(item.name)}</span>
               </button>
             ))}
           </div>
