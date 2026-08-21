@@ -39,12 +39,14 @@ DeepSeek Harness（DSH）皮肤插件：上传你自己的图片作为**画廊�
 通过 DSH 官方插件命令安装（会自动注册到 profile 的 bundle 层并启用）：
 
 ```sh
-# 从 GitHub Releases 下载 .tgz 后用本地路径安装
+# 方式一：从 GitHub Releases 下载 .tgz 后用本地路径安装（推荐）
 dsh plugin --profile web add ./dsh-photowall-skin-0.5.0.tgz
 
-# 或发布到 npm / Git 后按包名安装
-dsh plugin --profile web add dsh-photowall-skin
+# 方式二：直接引用 GitHub 仓库安装
+dsh plugin --profile web add github:3060571770/dsh-photowall-skin
 ```
+
+> `github:` 方式要求仓库为**公开仓库**；pnpm 克隆后会先执行 `prepare` 自动构建出 `lib/`，无需手动编译。
 
 装完重启 `dsh web`，刷新页面，皮肤即出现在「设置 → 🎨 皮肤」。
 

@@ -54,6 +54,7 @@
     "scripts":  {
                     "clean":  "node -e \"require(\u0027node:fs\u0027).rmSync(\u0027lib\u0027,{recursive:true,force:true})\"",
                     "build":  "pnpm run clean \u0026\u0026 tsdown",
+                    "prepare":  "tsdown",
                     "test":  "pnpm run build \u0026\u0026 node --test tests/*.test.mjs",
                     "pack:local":  "pnpm run test \u0026\u0026 pnpm pack"
                 },
